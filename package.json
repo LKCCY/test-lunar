@@ -1,7 +1,14 @@
 {
-  "name": "root",
+  "name": "lerna-repo",
   "private": true,
-  "devDependencies": {
-    "lerna": "^3.22.1"
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": ["packages/normal-test/*"],
+  "repository": "https://github.com/LKCCY/test-lunar.git",
+  "author": "liukai154 <liukai153@jd.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:normal": "lerna run --scope @normal-test/* --parallel start",
+    "build:normal": "lerna run --scope @normal-test/* build"
   }
 }
