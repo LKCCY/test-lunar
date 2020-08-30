@@ -3,12 +3,19 @@
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
-  "workspaces": ["packages/normal-test/*"],
+  "workspaces": [
+    "packages/normal-test/*",
+    "packages/normal-dist/*"
+  ],
   "repository": "https://github.com/LKCCY/test-lunar.git",
   "author": "liukai154 <liukai153@jd.com>",
   "license": "MIT",
   "scripts": {
     "start:normal": "lerna run --scope @normal-test/* --parallel start",
-    "build:normal": "lerna run --scope @normal-test/* build"
+    "build:normal": "lerna run --scope @normal-test/* build",
+    "start:dist": "lerna run --scope @normal-dist/* --parallel start"
+  },
+  "dependencies": {
+    "serve": "^11.3.2"
   }
 }

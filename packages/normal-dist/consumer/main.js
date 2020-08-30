@@ -146,22 +146,22 @@
 				var versions = scope[name] = scope[name] || {};
 				var activeVersion = versions[version];
 				if(!activeVersion || !activeVersion.loaded && uniqueName > activeVersion.from) versions[version] = { get: factory, from: uniqueName };
- 			};
- 			var initExternal = (id) => {
- 				var handleError = (err) => warn("Initialization of sharing external failed: " + err);
- 				try {
- 					var module = __webpack_require__(id);
- 					if(!module) return;
- 					var initFn = (module) => module && module.init && module.init(__webpack_require__.S[name])
- 					if(module.then) return promises.push(module.then(initFn, handleError));
- 					var initResult = initFn(module);
- 					if(initResult && initResult.then) return promises.push(initResult.catch(handleError));
- 				} catch(err) { handleError(err); }
- 			}
- 			var promises = [];
- 			switch(name) {
- 			}
- 			return promises.length && (initPromises[name] = Promise.all(promises).then(() => initPromises[name] = 1));
+			};
+			var initExternal = (id) => {
+				var handleError = (err) => warn("Initialization of sharing external failed: " + err);
+				try {
+					var module = __webpack_require__(id);
+					if(!module) return;
+					var initFn = (module) => module && module.init && module.init(__webpack_require__.S[name])
+					if(module.then) return promises.push(module.then(initFn, handleError));
+					var initResult = initFn(module);
+					if(initResult && initResult.then) return promises.push(initResult.catch(handleError));
+				} catch(err) { handleError(err); }
+			}
+			var promises = [];
+			switch(name) {
+			}
+			return promises.length && (initPromises[name] = Promise.all(promises).then(() => initPromises[name] = 1));
     };
   })();
 
@@ -242,7 +242,6 @@
       while(resolves.length) {
         resolves.shift()();
       }
-    
     };
 
     var jsonpArray = window["webpackJsonp_normal_test_app2"] = window["webpackJsonp_normal_test_app2"] || [];

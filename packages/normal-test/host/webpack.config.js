@@ -13,6 +13,7 @@ module.exports = {
     port: 3001
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new ModuleFederationPlugin({
         name: "app1",
         library: { type: "var", name: "app1" },
@@ -27,5 +28,5 @@ module.exports = {
   ],
   output: {
     publicPath: "http://localhost:3001/"
-  },
+  }
 };

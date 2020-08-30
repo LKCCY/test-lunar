@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const { ModuleFederationPlugin } = require("webpack").container
 
@@ -13,6 +13,7 @@ module.exports = {
     port: 3002
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new ModuleFederationPlugin({
         name: "app2",
         library: { type: "var", name: "app2" },
@@ -28,5 +29,5 @@ module.exports = {
   ],
   output: {
     publicPath: "http://localhost:3002/"
-  },
+  }
 };

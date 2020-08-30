@@ -1,0 +1,9 @@
+{
+  "name": "@normal-dist/consumer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx serve -l 3002"
+  }
+}
