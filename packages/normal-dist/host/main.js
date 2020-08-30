@@ -1,10 +1,8 @@
 (() => { // webpackBootstrap
 	var __webpack_modules__ = ({
-
-  "webpack/container/reference/app2":((module) => {
-    module.exports = app2;
-  })
-
+    "webpack/container/reference/app2":((module) => {
+      module.exports = app2;
+    })
   });
   // The module cache
   var __webpack_module_cache__ = {};
@@ -140,9 +138,10 @@
 		__webpack_require__.p = "http://localhost:3001/";
 	})();
 
-	/* webpack/runtime/remotes loading */
+	/* webpack/runtime/remotes loading  remote 特有 */
 	(() => {
-		var installedModules = {};
+    var installedModules = {};
+    // map for Remote
 		var chunkMapping = {
 			"src_bootstrap_js": [
 				"webpack/container/remote/app2/Print"
@@ -154,9 +153,11 @@
 				"./Print",
 				"webpack/container/reference/app2"
 			]
-		};
+    };
+    // 懒加载之前先执行 remotes
     __webpack_require__.f.remotes = (chunkId, promises) => {
       if(__webpack_require__.o(chunkMapping, chunkId)) {
+
         chunkMapping[chunkId].forEach((id) => {
           if(installedModules[id]) return promises.push(installedModules[id]);
           var data = idToExternalAndNameMapping[id];
@@ -169,6 +170,7 @@
             }
             installedModules[id] = 0;
           };
+
           var handleFunction = (fn, key, data, next, first) => {
             try {
               var promise = fn(key, data);
@@ -182,21 +184,29 @@
               onError(error);
             }
           }
+          // get Export lib and external lib
+          // __webpack_require__.I share __webpack_require__.s with custom app
           var onExternal = (external, _, first) => external ? handleFunction(__webpack_require__.I, data[0], external, onInitialized, first) : onError();
-          var onInitialized = (_, external, first) => handleFunction(external.get, data[1], external, onFactory, first)
+
+          var onInitialized = (_, external, first) => {
+            handleFunction(external.get, data[1], external, onFactory, first)
+          }
+
           var onFactory = (factory) => {
+            // factory:  () => (__webpack_require__( "./src/Print.js")
             installedModules[id] = 1;
             __webpack_modules__[id] = (module) => {
               module.exports = factory();
             }
           };
+          // TODO: 定位 promise
           handleFunction(__webpack_require__, data[2], 1, onExternal, 1);
         });
       }
     }
   })();
 
- 	/* webpack/runtime/sharing */
+/* webpack/runtime/sharing  sharing*/
   (() => {
     __webpack_require__.S = {};
     var initPromises = {};
@@ -209,6 +219,7 @@
       if(!__webpack_require__.o(__webpack_require__.S, name)) __webpack_require__.S[name] = {};
       // runs all init snippets from all modules reachable
       var scope = __webpack_require__.S[name];
+
       var warn = (msg) => typeof console !== "undefined" && console.warn && console.warn(msg);;
       var uniqueName = "@normal-test/app1";
       var register = (name, version, factory) => {
@@ -217,20 +228,28 @@
         if(!activeVersion || !activeVersion.loaded && uniqueName > activeVersion.from) versions[version] = { get: factory, from: uniqueName };
       };
       var initExternal = (id) => {
+
         var handleError = (err) => warn("Initialization of sharing external failed: " + err);
+
         try {
           var module = __webpack_require__(id);
           if(!module) return;
+
           var initFn = (module) => module && module.init && module.init(__webpack_require__.S[name])
+
           if(module.then) return promises.push(module.then(initFn, handleError));
+
           var initResult = initFn(module);
+
           if(initResult && initResult.then) return promises.push(initResult.catch(handleError));
         } catch(err) { handleError(err); }
       }
+
       var promises = [];
+
       switch(name) {
         case "default": {
-          initExternal("webpack/container/reference/app2");
+          initExternal("webpack/container/reference/app2"); // share scropes with custom app
         }
         break;
       }

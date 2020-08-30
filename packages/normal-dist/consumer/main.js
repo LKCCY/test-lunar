@@ -6,25 +6,25 @@
  	// The require function
   function __webpack_require__(moduleId) {
  		// Check if module is in cache
- 		if(__webpack_module_cache__[moduleId]) {
- 			return __webpack_module_cache__[moduleId].exports;
- 		}
+		if(__webpack_module_cache__[moduleId]) {
+			return __webpack_module_cache__[moduleId].exports;
+		}
  		// Create a new module (and put it into the cache)
- 		var module = __webpack_module_cache__[moduleId] = {
+		var module = __webpack_module_cache__[moduleId] = {
  			// no module.id needed
  			// no module.loaded needed
- 			exports: {}
- 		};
- 	
+			exports: {}
+		};
+
  		// Execute the module function
- 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
- 	
+		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+
  		// Return the exports of the module
- 		return module.exports;
+		return module.exports;
   }
 
  	// expose the modules object (__webpack_modules__)
-  __webpack_require__.m = __webpack_modules__;
+	__webpack_require__.m = __webpack_modules__;
 
  	/* webpack/runtime/define property getters */
   (() => {
@@ -80,6 +80,7 @@
 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
 				}
 			}
+
 			if(!script) {
 				needAttach = true;
 				script = document.createElement('script');
@@ -93,6 +94,7 @@
 				script.src = url;
 			}
 			inProgress[url] = [done];
+
 			var onScriptComplete = (prev, event) => {
 				// avoid mem leaks in IE.
 				script.onerror = script.onload = null;
@@ -176,7 +178,8 @@
 
     __webpack_require__.f.j = (chunkId, promises) => {
  				// JSONP chunk loading for javascript
-        var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+
 				if(installedChunkData !== 0) { // 0 means "already installed".
 
 					// a Promise means "currently loading".
@@ -221,10 +224,11 @@
       var chunkIds = data[0];
       var moreModules = data[1];
 
-      var runtime = data[3];
+			var runtime = data[3];
       // add "moreModules" to the modules object,
       // then flag all "chunkIds" as loaded and fire callback
-      var moduleId, chunkId, i = 0, resolves = [];
+			var moduleId, chunkId, i = 0, resolves = [];
+
       for(;i < chunkIds.length; i++) {
         chunkId = chunkIds[i];
         if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
@@ -244,7 +248,7 @@
       }
     };
 
-    var jsonpArray = window["webpackJsonp_normal_test_app2"] = window["webpackJsonp_normal_test_app2"] || [];
+		var jsonpArray = window["webpackJsonp_normal_test_app2"] = window["webpackJsonp_normal_test_app2"] || [];
     var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
     jsonpArray.push = webpackJsonpCallback;
     var parentJsonpFunction = oldJsonpFunction;
