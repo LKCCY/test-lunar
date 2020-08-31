@@ -5,7 +5,8 @@
   "main": "index.js",
   "workspaces": [
     "packages/normal-test/*",
-    "packages/normal-dist/*"
+    "packages/normal-dist/*",
+    "packages/vue-test/*"
   ],
   "repository": "https://github.com/LKCCY/test-lunar.git",
   "author": "liukai154 <liukai153@jd.com>",
@@ -13,7 +14,8 @@
   "scripts": {
     "start:normal": "lerna run --scope @normal-test/* --parallel start",
     "build:normal": "lerna run --scope @normal-test/* build",
-    "start:dist": "lerna run --scope @normal-dist/* --parallel start"
+    "start:dist": "lerna run --scope @normal-dist/* --parallel start",
+    "start:vue": "lerna run --scope @vue-custom/* --parallel start"
   },
   "dependencies": {
     "serve": "^11.3.2"

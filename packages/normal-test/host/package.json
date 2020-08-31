@@ -17,6 +17,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "html-webpack-plugin": "^4.0.0-beta.14"
+    "html-webpack-plugin": "git://github.com/ScriptedAlchemy/html-webpack-plugin#master"
   }
 }

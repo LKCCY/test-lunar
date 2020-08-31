@@ -52,7 +52,7 @@
 	})();
 	/* webpack/runtime/ensure chunk */
 	(() => {
-		__webpack_require__.f = {};
+    __webpack_require__.f = {};
 		// This file contains only the entry chunk.
 		// The chunk loading function for additional chunks
 		__webpack_require__.e = (chunkId) => {
@@ -154,7 +154,7 @@
 				"webpack/container/reference/app2"
 			]
     };
-    // 懒加载之前先执行 remotes
+    // 执行 remotes
     __webpack_require__.f.remotes = (chunkId, promises) => {
       if(__webpack_require__.o(chunkMapping, chunkId)) {
 
@@ -199,7 +199,6 @@
               module.exports = factory();
             }
           };
-          // TODO: 定位 promise
           handleFunction(__webpack_require__, data[2], 1, onExternal, 1);
         });
       }
@@ -209,6 +208,7 @@
 /* webpack/runtime/sharing  sharing*/
   (() => {
     __webpack_require__.S = {};
+
     var initPromises = {};
     __webpack_require__.I = (name) => {
       // only runs once
@@ -227,6 +227,7 @@
         var activeVersion = versions[version];
         if(!activeVersion || !activeVersion.loaded && uniqueName > activeVersion.from) versions[version] = { get: factory, from: uniqueName };
       };
+
       var initExternal = (id) => {
 
         var handleError = (err) => warn("Initialization of sharing external failed: " + err);
@@ -242,6 +243,7 @@
           var initResult = initFn(module);
 
           if(initResult && initResult.then) return promises.push(initResult.catch(handleError));
+
         } catch(err) { handleError(err); }
       }
 
@@ -253,6 +255,7 @@
         }
         break;
       }
+
       return promises.length && (initPromises[name] = Promise.all(promises).then(() => initPromises[name] = 1));
     };
   })();
